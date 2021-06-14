@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "915884853825",
+    "project_id": "quicktweets-e54de",
+    "storage_bucket": "quicktweets-e54de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915884853825:android:dee1b5526accc6a73414c0",
+        "android_client_info": {
+          "package_name": "com.example.quicktweets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915884853825-4uhr54ghftgeburv03foa8kuge95fgo8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quicktweets",
+            "certificate_hash": "4637f5540205d7386798d38c0ebfd3d1ef33546d"
+          }
+        },
+        {
+          "client_id": "915884853825-89aout88fg73bvmt4nfhu704rls0dssi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGlgXR0T7zXA6E7HE8mSuKzTNFADrYJVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915884853825-89aout88fg73bvmt4nfhu704rls0dssi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
