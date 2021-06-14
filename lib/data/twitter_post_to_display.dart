@@ -4,6 +4,7 @@ class Tweets {
   String? text;
   bool? imageThere = false;
   List<String?>? imgUrls;
+
   String? username;
   String? name;
   String? uid;

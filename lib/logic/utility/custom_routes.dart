@@ -28,10 +28,10 @@ class Customroutes {
                   create: (newcontext) => AuthBloc(firebaseAuth: firebaseAuth),
                   child: Splashscreen(),
                 ));
-      case twitterTimeLine:
-        return MaterialPageRoute(
-            settings: const RouteSettings(name: '\twitterTimeLine'),
-            builder: (context) => TwitterTimeLineScreen());
+      // case twitterTimeLine:
+      //   return MaterialPageRoute(
+      //       settings: const RouteSettings(name: '\twitterTimeLine'),
+      //       builder: (context) => TwitterTimeLineScreen());
       case home:
         return MaterialPageRoute(
             settings: const RouteSettings(name: '\home'),

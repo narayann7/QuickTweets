@@ -42,18 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      //   teleport(context, twitterTimeLine);
                       context.read<GetdataCubit>().enterUsername(username);
-                      // print("nn");
-                      // FetchFromApi fetchFromApi = FetchFromApi();
-                      // fetchFromApi.getUserData(username);
                     },
                     child: BlocConsumer<GetdataCubit, GetdataState>(
                       listener: (context, state) {
                         if (state.getdataStatus == GetdataStatus.success) {
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return TwitterTimeLineScreen();
+                            return TwitterTimeLineScreen(
+                              twitterPosts: state.twitterPosts,
+                              twitterUser: state.twitterUser,
+                            );
                           }));
 
                           print(state.twitterUser!.data!.name);
@@ -81,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
-                  Text(usernamex)
+                  Text(usernamex),
                 ],
               ),
             )));
