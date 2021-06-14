@@ -32,6 +32,9 @@ class FetchFromApi {
       }
 
       twitterUser = TwitterUser.fromJson(userMapJson);
+      print("hela re pila");
+      print(twitterUser!.data!.name);
+      print(twitterUser!.data!.username);
       isError = false;
       return isError;
     } catch (e) {

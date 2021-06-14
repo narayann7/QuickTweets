@@ -12,15 +12,15 @@ class GetdataState extends Equatable {
   });
 
   factory GetdataState.initial() {
-    List<Tweets> t = [Tweets.initial()];
-    return GetdataState(
-        getdataStatus: GetdataStatus.initial,
-        twitterPosts: TwitterPosts(tweets: t),
-        twitterUser: TwitterUser());
+    return GetdataState(getdataStatus: GetdataStatus.initial);
   }
 
   @override
   bool? get stringify => true;
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [
+        this.getdataStatus,
+        this.twitterUser,
+        this.twitterPosts,
+      ];
 }

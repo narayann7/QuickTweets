@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quicktweets/data/auth.dart';
 import 'package:quicktweets/logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:quicktweets/logic/cubits/getData/getdata_cubit.dart';
 import 'package:quicktweets/logic/cubits/login_cubit/login_cubit.dart';
 import 'package:quicktweets/logic/cubits/signup_cubit/cubit/signup_cubit.dart';
 import 'package:quicktweets/presentation/screens/home_screen.dart';
@@ -34,7 +35,8 @@ class Customroutes {
       case home:
         return MaterialPageRoute(
             settings: const RouteSettings(name: '\home'),
-            builder: (context) => HomeScreen());
+            builder: (context) => BlocProvider<GetdataCubit>(
+                create: (context) => GetdataCubit(), child: HomeScreen()));
       case collection:
         return MaterialPageRoute(
             settings: const RouteSettings(name: '\collection'),
