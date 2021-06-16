@@ -19,15 +19,14 @@ FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 class Customroutes {
   static Route generateroute(RouteSettings settings) {
     print("${settings.name}");
-
     switch (settings.name) {
       case splash:
         return MaterialPageRoute(
             settings: const RouteSettings(name: '/splash'),
             builder: (_) => BlocProvider<AuthBloc>(
-                  create: (newcontext) => AuthBloc(firebaseAuth: firebaseAuth),
-                  child: Splashscreen(),
-                ));
+                create: (newcontext) => AuthBloc(firebaseAuth: firebaseAuth),
+                child: Splashscreen()));
+
       // case twitterTimeLine:
       //   return MaterialPageRoute(
       //       settings: const RouteSettings(name: '\twitterTimeLine'),

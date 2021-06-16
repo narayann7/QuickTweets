@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quicktweets/logic/cubits/signup_cubit/cubit/signup_cubit.dart';
 import 'package:quicktweets/logic/utility/all_constants.dart';
-import 'package:quicktweets/logic/utility/morethanonces.dart';
 
 class Signupscreen extends StatelessWidget {
   const Signupscreen({Key? key}) : super(key: key);
@@ -24,63 +24,140 @@ class Signupscreen extends StatelessWidget {
                     ));
           }
           if (state.signupstatus == Signupstatus.success)
-            teleport(context, splash);
+            Navigator.pushNamed(
+              context,
+              splash,
+            );
         },
-        builder: (context, state) => Scaffold(
-              body: Center(
-                child: Container(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        onChanged: (value) =>
-                            context.read<SignupCubit>().fillUsername(value),
-                        decoration: InputDecoration(hintText: 'username'),
-                        style: TextStyle(),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        onChanged: (value) =>
-                            context.read<SignupCubit>().fillEmail(value),
-                        decoration: InputDecoration(hintText: 'email'),
-                        style: TextStyle(),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        onChanged: (value) =>
-                            context.read<SignupCubit>().fillPassword(value),
-                        decoration: InputDecoration(hintText: 'pass'),
-                        style: TextStyle(),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () async {
-                        print("signup");
-                        context.read<SignupCubit>().signup();
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 30,
-                        width: 100,
-                        decoration: BoxDecoration(color: Colors.amber[100]),
-                        child: Text(
-                          "signup",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
+        builder: (context, state) => GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: Scaffold(
+                  resizeToAvoidBottomInset: false,
+                  body: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("images/sc1.png"),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                    )
-                  ],
-                )),
-              ),
+                      Positioned(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.8,
+                          width: MediaQuery.of(context).size.width * 0.85,
+                          decoration: BoxDecoration(color: Colors.transparent),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Create\nAccount",
+                                style: GoogleFonts.getFont('Sen',
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white70,
+                                    fontSize: 40),
+                                textAlign: TextAlign.left,
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.23,
+                              ),
+                              TextField(
+                                cursorColor: d3,
+                                onChanged: (value) => context
+                                    .read<SignupCubit>()
+                                    .fillUsername(value),
+                                decoration: InputDecoration(
+                                  hintText: 'username',
+                                ),
+                                style: TextStyle(),
+                              ),
+                              TextField(
+                                cursorColor: d3,
+                                onChanged: (value) => context
+                                    .read<SignupCubit>()
+                                    .fillEmail(value),
+                                decoration: InputDecoration(
+                                  hintText: 'email',
+                                ),
+                                style: TextStyle(),
+                              ),
+                              TextField(
+                                obscureText: true,
+                                onChanged: (pass) => context
+                                    .read<SignupCubit>()
+                                    .fillPassword(pass),
+                                decoration: InputDecoration(hintText: 'pass'),
+                                style: TextStyle(),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).pushNamed(login);
+                                    },
+                                    child: Text(
+                                      "Login",
+                                      style: GoogleFonts.getFont('Quicksand',
+                                          fontWeight: FontWeight.w500,
+                                          letterSpacing: 0.5,
+                                          color: d2,
+                                          fontSize: 20),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Stack(alignment: Alignment.center, children: [
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.25,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      decoration: BoxDecoration(
+                                          color: Colors.transparent),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 100,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle, color: p9),
+                                    ),
+                                    Positioned(
+                                      right: 90,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          context.read<SignupCubit>().signup();
+                                        },
+                                        child: Text(
+                                          "SignUp",
+                                          style: GoogleFonts.getFont(
+                                              'Quicksand',
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 0.5,
+                                              color: d2,
+                                              fontSize: 35),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  )),
             ));
   }
 }

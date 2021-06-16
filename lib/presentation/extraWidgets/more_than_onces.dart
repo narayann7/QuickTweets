@@ -1,24 +1,27 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quicktweets/logic/utility/all_imports.dart';
 
+Widget dis(String x) {
+  return Text("o");
+}
+
 Widget displayTweets(
-    {BuildContext? context,
-    String? createdAt,
-    String? postId,
-    String? text,
-    bool? imageThere,
-    List<String?>? imgUrls,
-    String? username,
-    String? name,
-    String? uid,
-    String? displayPicture}) {
+    BuildContext context,
+    String createdAt,
+    String postId,
+    String text,
+    bool imageThere,
+    List<dynamic> imgUrls,
+    String username,
+    String name,
+    String uid,
+    String displayPicture) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
       alignment: Alignment.center,
-      width: MediaQuery.of(context!).size.width,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(color: Colors.amber[100]),
       child: Container(
         child: Column(
@@ -57,7 +60,7 @@ Widget displayTweets(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          for (int i = 0; i < imgUrls!.length; i++)
+                          for (int i = 0; i < imgUrls.length; i++)
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15),
@@ -85,7 +88,7 @@ Widget displayTweets(
                     ),
                   )
                 : Container(),
-            Text(createdAt.toString()),
+            Text(createdAt),
           ],
         ),
       ),

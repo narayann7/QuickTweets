@@ -24,51 +24,22 @@ class _TweetCollectionState extends State<TweetCollection> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
         ),
-        body: StreamBuilder<QuerySnapshot>(
-          stream: collections
-              .collection("userdata")
-              .doc(user!.uid)
-              .collection("tweetData")
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (BuildContext context, int index) {
-                  DocumentSnapshot ds = snapshot.data!.docs[index];
-                  print(snapshot.data!.docs.length);
-
-                  // Tweets? t;
-                  // t!.createdAt = ds["createdAt"];
-                  // t.displayPicture = ds["displayPicture"];
-                  // t.id = ds["id"];
-                  // t.imageThere = ds["imageThere"];
-                  // t.text = ds["text"];
-                  // t.name = ds["name"];
-                  // t.uid = ds["uid"];
-                  // t.username = ds["username"];
-                  // t.imgUrls = ds["imgUrls"];
-
-                  return GestureDetector(onTap: () {}, child: Text("helo")
-
-                      //   displayTweets(
-                      //     context: context,
-                      //     createdAt: t.createdAt,
-                      //     displayPicture: t.displayPicture,
-                      //     name:t.name ,
-                      //     imageThere: t.imageThere,
-                      //     imgUrls: t.imgUrls,
-                      //     postId: t.id,
-                      //     text: t.text,
-                      //     uid:t.uid,
-                      //     username:t.username,
-                      //   ),
-                      );
-                },
-              );
-            }
-            return Text("no data");
-          },
-        ));
+        body: Stack(alignment: Alignment.bottomCenter, children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/bg.jpeg"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Image.asset(
+            "images/lo1.gif",
+            height: 125.0,
+            width: 125.0,
+          ),
+        ]));
   }
 }

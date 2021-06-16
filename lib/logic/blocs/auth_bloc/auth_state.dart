@@ -6,6 +6,10 @@ class AuthState {
     this.auth_enum = Auth_enum.login,
   });
 
+  factory AuthState.initial() {
+    return AuthState(auth_enum: Auth_enum.initial);
+  }
+
   factory AuthState.login() {
     return AuthState(auth_enum: Auth_enum.login);
   }

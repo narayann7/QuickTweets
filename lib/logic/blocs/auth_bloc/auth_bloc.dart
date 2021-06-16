@@ -10,14 +10,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   auth.FirebaseAuth _firebaseAuth;
   AuthBloc({required auth.FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth,
-        super(AuthState.login()) {
-    add(UserWillchange());
+        super(AuthState.initial()) {
+    if (_firebaseAuth.currentUser != null) add(UserWillchange());
   }
 
   @override
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
+    if (event is SkipOrNext) yield AuthState.login();
     if (event is UserWillchange) {
       if (_firebaseAuth.currentUser != null)
         yield AuthState.home();

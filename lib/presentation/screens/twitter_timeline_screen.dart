@@ -147,45 +147,34 @@ class _TwitterTimeLineScreenState extends State<TwitterTimeLineScreen> {
     }
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-      ),
-      appBar: AppBar(
-        title: Text("yo"),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              teleport(context, collection);
-            },
-            child: Icon(Icons.favorite),
-          )
-        ],
-      ),
-      body: ListView.builder(
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-        controller: scrollController,
-        itemCount: tweets.length,
-        itemBuilder: (BuildContext context, int i) {
-          return GestureDetector(
-            onTap: () {
-              print("hello bitxh${tweets[i].createdAt} ");
-              showAlertDeleteDialog(context, tweets[i]);
-            },
-            child: displayTweets(
-              context: context,
-              createdAt: tweets[i].createdAt,
-              displayPicture: tweets[i].displayPicture,
-              name: tweets[i].name,
-              imageThere: tweets[i].imageThere,
-              imgUrls: tweets[i].imgUrls,
-              postId: tweets[i].id,
-              text: tweets[i].text,
-              uid: tweets[i].uid,
-              username: tweets[i].username,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+        ),
+        appBar: AppBar(
+          title: Text("yo"),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                teleport(context, collection);
+              },
+              child: Icon(
+                Icons.favorite,
+                color: t3,
+              ),
+            )
+          ],
+        ),
+        body: Stack(alignment: Alignment.bottomCenter, children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/bg.jpeg"),
+                fit: BoxFit.cover,
+              ),
             ),
-          );
-        },
-      ),
-    );
+          ),
+        ]));
   }
 }
