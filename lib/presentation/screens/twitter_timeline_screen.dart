@@ -182,7 +182,7 @@ class _TwitterTimeLineScreenState extends State<TwitterTimeLineScreen> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/bg.jpeg"),
+                image: AssetImage("images/bg1.jpg"),
                 fit: BoxFit.cover,
               ),
             ),

@@ -194,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage("images/bg.jpeg"),
+                          image: AssetImage("images/bg1.jpg"),
                           fit: BoxFit.cover,
                         ),
                       ),
