@@ -53,11 +53,11 @@ class FetchFromApi {
       var tweetsUrl;
       if (nextRequired == false) {
         tweetsUrl =
-            "https://api.twitter.com/2/users/${uid}/tweets?max_results=100&expansions=attachments.media_keys&tweet.fields=created_at&media.fields=type,url&exclude=retweets,replies";
+            "https://api.twitter.com/2/users/${uid}/tweets?max_results=20&expansions=attachments.media_keys&tweet.fields=created_at&media.fields=type,url&exclude=retweets,replies";
       } else {
         next = "&until_id=$next";
         tweetsUrl =
-            "https://api.twitter.com/2/users/${uid}/tweets?max_results=100${next}&expansions=attachments.media_keys&tweet.fields=created_at&media.fields=type,url&exclude=retweets,replies";
+            "https://api.twitter.com/2/users/${uid}/tweets?max_results=20${next}&expansions=attachments.media_keys&tweet.fields=created_at&media.fields=type,url&exclude=retweets,replies";
       }
 
       var rawTweetsJson = await http.get(Uri.parse(tweetsUrl), headers: {
@@ -70,7 +70,6 @@ class FetchFromApi {
       }
 
       Map<String, dynamic> TweetsMapJson = jsonDecode(rawTweetsJson.body);
-      // print(TweetsMapJson);
       if (TweetsMapJson["errors"] != null) {
         return isError;
       }

@@ -11,7 +11,6 @@ import 'package:quicktweets/presentation/screens/login_screen.dart';
 import 'package:quicktweets/presentation/screens/signup_screen.dart';
 import 'package:quicktweets/presentation/screens/splash_screen.dart';
 import 'package:quicktweets/presentation/screens/tweet_collection.dart';
-import 'package:quicktweets/presentation/screens/twitter_timeline_screen.dart';
 import 'all_constants.dart';
 
 FirebaseAuth firebaseAuth = FirebaseAuth.instance;

@@ -22,6 +22,9 @@ class LoginCubit extends Cubit<LoginState> {
   void login() async {
     emit(state.copyWith(loginstatus: Loginstatus.submmiting));
     try {
+      if (state.email.isEmpty && state.password.isEmpty) {
+        emit(state.copyWith(loginstatus: Loginstatus.error));
+      }
       await authClass.signInWithEmailAndPass(
           email: state.email, password: state.password);
       emit(state.copyWith(loginstatus: Loginstatus.success));

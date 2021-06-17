@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quicktweets/data/fetch_from_api.dart';
 import 'package:quicktweets/data/twitter_post_to_display.dart';
 import 'package:quicktweets/data/twitter_posts.dart';
@@ -77,19 +79,20 @@ class _TwitterTimeLineScreenState extends State<TwitterTimeLineScreen> {
       AlertDialog alert = AlertDialog(
         contentTextStyle: TextStyle(fontSize: 18, color: Colors.white),
         //   backgroundColor: Colors.transparent,
+        backgroundColor: d,
         content: Container(
           width: 280.0,
           height: 130,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("this note will be deleted !"),
+              Text("Want to save this?"),
               SizedBox(height: 17),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(),
+                      style: ElevatedButton.styleFrom(primary: d7),
                       onPressed: () {
                         collections
                             .collection("userdata")
@@ -117,7 +120,7 @@ class _TwitterTimeLineScreenState extends State<TwitterTimeLineScreen> {
                       )),
                   SizedBox(width: 32.1),
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(),
+                      style: ElevatedButton.styleFrom(primary: d7),
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -147,19 +150,28 @@ class _TwitterTimeLineScreenState extends State<TwitterTimeLineScreen> {
     }
 
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-        ),
         appBar: AppBar(
-          title: Text("yo"),
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back_ios_rounded,
+              color: p9,
+            ),
+          ),
+          backgroundColor: d,
           actions: [
-            GestureDetector(
-              onTap: () {
-                teleport(context, collection);
-              },
-              child: Icon(
-                Icons.favorite,
-                color: t3,
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: GestureDetector(
+                onTap: () {
+                  teleport(context, collection);
+                },
+                child: Icon(
+                  Icons.favorite,
+                  color: p9,
+                ),
               ),
             )
           ],
@@ -175,6 +187,146 @@ class _TwitterTimeLineScreenState extends State<TwitterTimeLineScreen> {
               ),
             ),
           ),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height * 0.18,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: d, borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color: Colors.grey.shade700)),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    360,
+                                  ),
+                                  child: CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: widget
+                                        .twitterUser!.data!.profileImageUrl
+                                        .toString(),
+                                    placeholder: (context, url) => Container(
+                                      color: d7,
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        new Icon(Icons.error),
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      widget.twitterUser!.data!.name.toString(),
+                                      style: GoogleFonts.getFont("Sen",
+                                          color: w, fontSize: 18),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text(
+                                      widget.twitterUser!.data!.username
+                                          .toString(),
+                                      style: GoogleFonts.getFont("Sen",
+                                          color: Colors.grey.shade500,
+                                          fontSize: 13),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 65, bottom: 2),
+                            child: Text(
+                              removeLinks(widget.twitterUser!.data!.description
+                                  .toString()),
+                              style: GoogleFonts.getFont("Sen",
+                                  color: w, fontSize: 15),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 65, bottom: 2),
+                            child: Text(
+                              removeLinks(
+                                  "followers :${widget.twitterUser!.data!.publicMetrics!.followersCount.toString()}"),
+                              style: GoogleFonts.getFont("Sen",
+                                  color: w, fontSize: 15),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 65, bottom: 2),
+                            child: Text(
+                              removeLinks(
+                                  "following :${widget.twitterUser!.data!.publicMetrics!.followingCount.toString()}"),
+                              style: GoogleFonts.getFont("Sen",
+                                  color: w, fontSize: 15),
+                            ),
+                          ),
+                        ]),
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.90,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(color: Colors.transparent),
+                  child: ListView.builder(
+                    physics: BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    controller: scrollController,
+                    itemCount: tweets.length,
+                    itemBuilder: (BuildContext context, int i) {
+                      bool imgthere =
+                          tweets[i].imageThere == true ? true : false;
+
+                      List<String> imgurls = [""];
+
+                      if (tweets[i].imageThere == true) {
+                        for (int img = 0;
+                            img < tweets[i].imgUrls!.length;
+                            img++) {
+                          imgurls.add(tweets[i].imgUrls![img].toString());
+                        }
+                        imgurls.removeAt(0);
+                      }
+
+                      return GestureDetector(
+                        onTap: () {
+                          showAlertDeleteDialog(context, tweets[i]);
+                        },
+                        child: displayTweets(
+                          context,
+                          tweets[i].createdAt.toString(),
+                          tweets[i].id.toString(),
+                          tweets[i].text.toString(),
+                          imgthere,
+                          imgurls,
+                          tweets[i].username.toString(),
+                          tweets[i].name.toString(),
+                          tweets[i].uid.toString(),
+                          tweets[i].displayPicture.toString(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          )
         ]));
   }
 }

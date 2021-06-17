@@ -18,14 +18,103 @@ class _HomeScreenState extends State<HomeScreen> {
   String usernamex = "";
   @override
   Widget build(BuildContext context) {
-    showAlertDeleteDialog(BuildContext context) {
+    showAlertDeleteDialogLogout(BuildContext context) {
       AlertDialog alert = AlertDialog(
         contentTextStyle: TextStyle(fontSize: 18, color: Colors.white),
         //   backgroundColor: Colors.transparent,
+        backgroundColor: d,
         content: Container(
           width: 280.0,
           height: 130,
-          child: CircularProgressIndicator(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(" Want to Logout ? "),
+              SizedBox(height: 17),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: d7),
+                      onPressed: () async {
+                        var user = FirebaseAuth.instance;
+                        await user.signOut().then((value) {
+                          Navigator.pushNamed(context, login);
+                        });
+                      },
+                      child: Text(
+                        "confirm",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      )),
+                  SizedBox(width: 32.1),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: d7),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "no",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      )),
+                ],
+              )
+            ],
+          ),
+          decoration: new BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Colors.black12,
+            borderRadius: new BorderRadius.all(new Radius.circular(12.4)),
+          ),
+        ),
+      );
+
+      // show the dialog
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+    }
+
+    showAlertDeleteDialogClose(BuildContext context) {
+      AlertDialog alert = AlertDialog(
+        contentTextStyle: TextStyle(fontSize: 18, color: Colors.white),
+        backgroundColor: d,
+        content: Container(
+          width: 280.0,
+          height: 130,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(" Want to close ? "),
+              SizedBox(height: 17),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: d7),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "confirm",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      )),
+                  SizedBox(width: 32.1),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: d7),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "no",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      )),
+                ],
+              )
+            ],
+          ),
           decoration: new BoxDecoration(
             shape: BoxShape.rectangle,
             color: Colors.black12,
@@ -45,6 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return WillPopScope(
       onWillPop: () async {
+        showAlertDeleteDialogClose(context);
         return await false;
       },
       child: Scaffold(
@@ -67,13 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
             leading: GestureDetector(
                 onTap: () async {
-                  var user = FirebaseAuth.instance;
-                  showAlertDeleteDialog(context);
-                  //   Future.delayed(Duration(seconds: 10));
-
-                  await user.signOut().then((value) {
-                    Navigator.pushNamed(context, login);
-                  });
+                  showAlertDeleteDialogLogout(context);
                 },
                 child: Icon(
                   Icons.logout,
@@ -129,9 +213,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 GetdataStatus.loading
                                             ? p9
                                             : Colors.transparent,
-                                    blurRadius: 15,
+                                    blurRadius: 20,
                                     // offset: Offset(5, 5),
-                                    spreadRadius: 6)
+                                    spreadRadius: 4)
                               ],
                               color: d)),
                     ),
@@ -176,9 +260,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             GestureDetector(
                                 onTap: () {
-                                  context
-                                      .read<GetdataCubit>()
-                                      .enterUsername(username);
+                                  if (state.getdataStatus !=
+                                      GetdataStatus.loading)
+                                    context
+                                        .read<GetdataCubit>()
+                                        .enterUsername(username);
                                 },
                                 child: Container(
                                   alignment: Alignment.center,
@@ -190,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: state.getdataStatus ==
                                           GetdataStatus.loading
                                       ? Image.asset(
-                                          "images/lo1.gif",
+                                          "images/loading.gif",
                                           height: 125.0,
                                           width: 125.0,
                                         )

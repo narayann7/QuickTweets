@@ -3,12 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quicktweets/logic/cubits/signup_cubit/cubit/signup_cubit.dart';
 import 'package:quicktweets/logic/utility/all_constants.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class Signupscreen extends StatelessWidget {
   const Signupscreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
     return BlocConsumer<SignupCubit, SignupState>(
         listener: (context, state) {
           if (state.signupstatus == Signupstatus.submmiting) {
@@ -67,34 +70,56 @@ class Signupscreen extends StatelessWidget {
                                 height:
                                     MediaQuery.of(context).size.height * 0.23,
                               ),
-                              TextField(
-                                cursorColor: d3,
-                                onChanged: (value) => context
-                                    .read<SignupCubit>()
-                                    .fillUsername(value),
-                                decoration: InputDecoration(
-                                  hintText: 'username',
-                                ),
-                                style: TextStyle(),
-                              ),
-                              TextField(
-                                cursorColor: d3,
-                                onChanged: (value) => context
-                                    .read<SignupCubit>()
-                                    .fillEmail(value),
-                                decoration: InputDecoration(
-                                  hintText: 'email',
-                                ),
-                                style: TextStyle(),
-                              ),
-                              TextField(
-                                obscureText: true,
-                                onChanged: (pass) => context
-                                    .read<SignupCubit>()
-                                    .fillPassword(pass),
-                                decoration: InputDecoration(hintText: 'pass'),
-                                style: TextStyle(),
-                              ),
+                              Form(
+                                  key: formkey,
+                                  child: Column(children: [
+                                    TextFormField(
+                                      validator: (v) {
+                                        if (v!.length < 2) {
+                                          return "atleast >3";
+                                        }
+                                      },
+                                      cursorColor: d3,
+                                      onChanged: (value) => context
+                                          .read<SignupCubit>()
+                                          .fillUsername(value),
+                                      decoration: InputDecoration(
+                                        hintText: 'username',
+                                      ),
+                                      style: TextStyle(),
+                                    ),
+                                    TextFormField(
+                                      cursorColor: d3,
+                                      validator: MultiValidator([
+                                        EmailValidator(
+                                            errorText: "not a valid email"),
+                                        RequiredValidator(errorText: "required")
+                                      ]),
+                                      onChanged: (value) => context
+                                          .read<SignupCubit>()
+                                          .fillEmail(value),
+                                      decoration: InputDecoration(
+                                        hintText: 'email',
+                                      ),
+                                      style: TextStyle(),
+                                    ),
+                                    TextFormField(
+                                      obscureText: true,
+                                      validator: (v) {
+                                        if (v!.isEmpty || v.length < 6) {
+                                          return "atleast greater than 6";
+                                        }
+                                      },
+                                      onChanged: (pass) => context
+                                          .read<SignupCubit>()
+                                          .fillPassword(pass),
+                                      decoration:
+                                          InputDecoration(hintText: 'pass'),
+                                      style: TextStyle(),
+                                    ),
+                                  ])),
+                              if (state.signupstatus == Signupstatus.error)
+                                Text("error"),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

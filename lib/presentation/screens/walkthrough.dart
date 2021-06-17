@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:quicktweets/data/auth.dart';
 import 'package:quicktweets/logic/utility/all_constants.dart';
 import 'package:quicktweets/logic/utility/custom_routes.dart';

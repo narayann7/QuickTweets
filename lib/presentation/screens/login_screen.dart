@@ -3,27 +3,59 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quicktweets/logic/cubits/login_cubit/login_cubit.dart';
 import 'package:quicktweets/logic/utility/all_constants.dart';
-import 'package:quicktweets/logic/utility/morethanonces.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class Loginscreen extends StatelessWidget {
 //   const Loginscreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    showAlertDeleteDialog(BuildContext context) {
+    String error = "";
+    GlobalKey<FormState> formkey = GlobalKey<FormState>();
+    showAlertDeleteDialogClose(BuildContext context) {
       AlertDialog alert = AlertDialog(
         contentTextStyle: TextStyle(fontSize: 18, color: Colors.white),
-        //   backgroundColor: Colors.transparent,
-        content: CircularProgressIndicator(),
-        //    Container(
-        //     height: 20,
-        //     child: CircularProgressIndicator(),
-        //     decoration: new BoxDecoration(
-        //       shape: BoxShape.rectangle,
-        //       color: Colors.black12,
-        //       borderRadius: new BorderRadius.all(new Radius.circular(12.4)),
-        //     ),
-        //   ),
+        backgroundColor: d,
+        content: Container(
+          width: 280.0,
+          height: 130,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(" Want to close ? "),
+              SizedBox(height: 17),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: d7),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "confirm",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      )),
+                  SizedBox(width: 32.1),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: d7),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "no",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      )),
+                ],
+              )
+            ],
+          ),
+          decoration: new BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Colors.black12,
+            borderRadius: new BorderRadius.all(new Radius.circular(12.4)),
+          ),
+        ),
       );
 
       // show the dialog
@@ -49,6 +81,7 @@ class Loginscreen extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ));
         }
+
         if (state.loginstatus == Loginstatus.success)
           Navigator.pushNamed(context, splash);
       },
@@ -56,7 +89,7 @@ class Loginscreen extends StatelessWidget {
         onTap: () => FocusScope.of(context).unfocus(),
         child: WillPopScope(
           onWillPop: () async {
-            showAlertDeleteDialog(context);
+            showAlertDeleteDialogClose(context);
             return await false;
           },
           child: Scaffold(
@@ -96,24 +129,43 @@ class Loginscreen extends StatelessWidget {
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.27,
                             ),
-                            TextField(
-                              cursorColor: d3,
-                              onChanged: (value) => context
-                                  .read<LoginCubit>()
-                                  .fillEmail(email: value),
-                              decoration: InputDecoration(
-                                hintText: 'email',
-                              ),
-                              style: TextStyle(),
-                            ),
-                            TextField(
-                              obscureText: true,
-                              onChanged: (pass) => context
-                                  .read<LoginCubit>()
-                                  .fillPass(pass: pass),
-                              decoration: InputDecoration(hintText: 'pass'),
-                              style: TextStyle(),
-                            ),
+                            Form(
+                                key: formkey,
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      validator: MultiValidator([
+                                        EmailValidator(
+                                            errorText: "not a valid email"),
+                                        RequiredValidator(errorText: "required")
+                                      ]),
+                                      cursorColor: d3,
+                                      onChanged: (value) => context
+                                          .read<LoginCubit>()
+                                          .fillEmail(email: value),
+                                      decoration: InputDecoration(
+                                        hintText: 'email',
+                                      ),
+                                      style: TextStyle(),
+                                    ),
+                                    TextFormField(
+                                      obscureText: true,
+                                      validator: (v) {
+                                        if (v!.isEmpty || v.length < 6) {
+                                          return "atleast greater than 6";
+                                        }
+                                      },
+                                      onChanged: (pass) => context
+                                          .read<LoginCubit>()
+                                          .fillPass(pass: pass),
+                                      decoration:
+                                          InputDecoration(hintText: 'pass'),
+                                      style: TextStyle(),
+                                    ),
+                                  ],
+                                )),
+                            if (state.loginstatus == Loginstatus.error)
+                              Text("error"),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.end,
