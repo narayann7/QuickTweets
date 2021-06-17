@@ -129,7 +129,7 @@ class Loginscreen extends StatelessWidget {
                               textAlign: TextAlign.left,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.27,
+                              height: MediaQuery.of(context).size.height * 0.24,
                             ),
                             Form(
                                 key: formkey,
@@ -191,7 +191,7 @@ class Loginscreen extends StatelessWidget {
                                     height: MediaQuery.of(context).size.height *
                                         0.25,
                                     width:
-                                        MediaQuery.of(context).size.width * 0.5,
+                                        MediaQuery.of(context).size.width * 0.7,
                                     decoration: BoxDecoration(
                                         color: Colors.transparent),
                                   ),
@@ -203,7 +203,8 @@ class Loginscreen extends StatelessWidget {
                                         shape: BoxShape.circle, color: p9),
                                   ),
                                   Positioned(
-                                    right: 90,
+                                    right: MediaQuery.of(context).size.width *
+                                        0.30,
                                     child: GestureDetector(
                                       onTap: () {
                                         context.read<LoginCubit>().login();

@@ -68,7 +68,7 @@ class Signupscreen extends StatelessWidget {
                               ),
                               SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.23,
+                                    MediaQuery.of(context).size.height * 0.21,
                               ),
                               Form(
                                   key: formkey,
@@ -145,7 +145,7 @@ class Signupscreen extends StatelessWidget {
                                           MediaQuery.of(context).size.height *
                                               0.25,
                                       width: MediaQuery.of(context).size.width *
-                                          0.5,
+                                          0.7,
                                       decoration: BoxDecoration(
                                           color: Colors.transparent),
                                     ),
@@ -157,7 +157,8 @@ class Signupscreen extends StatelessWidget {
                                           shape: BoxShape.circle, color: p9),
                                     ),
                                     Positioned(
-                                      right: 90,
+                                      right: MediaQuery.of(context).size.width *
+                                          0.30,
                                       child: GestureDetector(
                                         onTap: () {
                                           context.read<SignupCubit>().signup();
