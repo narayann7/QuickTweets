@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quicktweets/logic/cubits/getData/getdata_cubit.dart';
 import 'package:quicktweets/logic/utility/all_constants.dart';
@@ -95,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: d7),
                       onPressed: () {
+                        SystemNavigator.pop();
                         Navigator.pop(context);
                       },
                       child: Text(

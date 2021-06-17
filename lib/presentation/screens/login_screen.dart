@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quicktweets/logic/cubits/login_cubit/login_cubit.dart';
@@ -30,6 +31,7 @@ class Loginscreen extends StatelessWidget {
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: d7),
                       onPressed: () {
+                        SystemNavigator.pop();
                         Navigator.pop(context);
                       },
                       child: Text(

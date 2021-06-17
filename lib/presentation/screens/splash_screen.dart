@@ -65,7 +65,17 @@ class Splashscreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        SizedBox(height: 40),
+                        SizedBox(height: 20),
+                        Text(
+                          "Swipe",
+                          style: GoogleFonts.getFont('Quicksand',
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.5,
+                              color: Colors.white70,
+                              fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 60),
                         GestureDetector(
                           onTap: () {
                             context.read<AuthBloc>().add(UserWillchange());
@@ -121,7 +131,17 @@ class Splashscreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 40),
+                        SizedBox(height: 20),
+                        Text(
+                          "Swipe",
+                          style: GoogleFonts.getFont('Quicksand',
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.5,
+                              color: d3,
+                              fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 60),
                         GestureDetector(
                           onTap: () {
                             context.read<AuthBloc>().add(UserWillchange());
