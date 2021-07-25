@@ -1,4 +1,4 @@
-Quick Tweets , enter the username of twitter user and get all the tweets of that respective user and if u liked one? then you can save it favorits tab ,it will automatically sink in cloud.
+Quick Tweets , enter the username of a twitter user and get all the tweets of that respective user and if you liked any? then you can save it into favorits tab ,it will automatically sink in cloud.
 
 APP uses :
 [twitters API](https://developer.twitter.com/en/docs/twitter-api) for getting the tweets
