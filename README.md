@@ -5,7 +5,7 @@ APP uses :
 BLOC patten as statemanagment
 Firebase for authentication and storing the data
 
-to watch vidoe demo [click](https://drive.google.com/file/d/1ZkGUYQ0ocrNJFqTyz3YtI6Bc8FjqXgrt/view?usp=drivesdk)
+to watch video demo [click](https://drive.google.com/file/d/1ZkGUYQ0ocrNJFqTyz3YtI6Bc8FjqXgrt/view?usp=drivesdk)
 to download APK [click](https://drive.google.com/file/d/1ZfGyFD0ZNpK2zE2juIRsqn7sRqytc1tQ/view?usp=drivesdk)
 
 
