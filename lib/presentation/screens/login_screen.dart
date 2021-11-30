@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quicktweets/logic/cubits/login_cubit/login_cubit.dart';
 import 'package:quicktweets/logic/utility/all_constants.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 
 class Loginscreen extends StatelessWidget {
 //   const Loginscreen({Key key}) : super(key: key);
@@ -136,11 +135,6 @@ class Loginscreen extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     TextFormField(
-                                      validator: MultiValidator([
-                                        EmailValidator(
-                                            errorText: "not a valid email"),
-                                        RequiredValidator(errorText: "required")
-                                      ]),
                                       cursorColor: d3,
                                       onChanged: (value) => context
                                           .read<LoginCubit>()

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quicktweets/logic/cubits/signup_cubit/cubit/signup_cubit.dart';
 import 'package:quicktweets/logic/utility/all_constants.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 
 class Signupscreen extends StatelessWidget {
   const Signupscreen({Key? key}) : super(key: key);
@@ -90,11 +89,6 @@ class Signupscreen extends StatelessWidget {
                                     ),
                                     TextFormField(
                                       cursorColor: d3,
-                                      validator: MultiValidator([
-                                        EmailValidator(
-                                            errorText: "not a valid email"),
-                                        RequiredValidator(errorText: "required")
-                                      ]),
                                       onChanged: (value) => context
                                           .read<SignupCubit>()
                                           .fillEmail(value),
